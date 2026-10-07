@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StudyPlanner</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">📘 StudyPlanner</div>
+    <nav class="nav" id="nav">
+      <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+      <button class="nav-btn" data-view="tasks">Tasks</button>
+      <button class="nav-btn" data-view="statistics">Statistics</button>
+      <button class="nav-btn" data-view="settings">Settings</button>
+    </nav>
+    <button class="icon-btn" id="themeToggle" aria-label="Toggle light or dark mode">🌙</button>
+  </header>
+
+  <main class="container">
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="view active">
+      <h1 id="greeting"></h1>
+      <p class="muted" id="todayDate"></p>
+      <div class="stats-grid" id="dashStats"></div>
+      <div class="card">
+        <div class="row-between"><strong>Today's progress</strong><span id="todayPercent">0%</span></div>
+        <div class="bar"><div class="bar-fill" id="todayBar"></div></div>
+      </div>
+      <h2>Today's Tasks</h2>
+      <div class="task-grid" id="todayTasks"></div>
+    </section>
+
+    <!-- TASKS -->
+    <section id="tasks" class="view">
+      <h2>Add Task</h2>
+      <form id="taskForm" class="card form" novalidate>
+        <input type="hidden" id="taskId">
+        <label>Task title
+          <input type="text" id="title" placeholder="Study JavaScript">
+          <small class="error" id="titleError"></small>
+        </label>
+        <label>Subject
+          <input type="text" id="subject" placeholder="Web Development">
+          <small class="error" id="subjectError"></small>
+        </label>
+        <label>Priority
+          <select id="priority">
+            <option>Low</option><option selected>Medium</option><option>High</option>
+          </select>
+        </label>
+        <label>Deadline
+          <input type="date" id="deadline">
+          <small class="error" id="deadlineError"></small>
+        </label>
+        <label class="full">Description (optional)
+          <textarea id="description" rows="2" placeholder="Study DOM manipulation"></textarea>
+        </label>
+        <div class="full actions">
+          <button type="submit" class="btn primary" id="submitBtn">Add Task</button>
+          <button type="button" class="btn" id="cancelEdit" hidden>Cancel</button>
+        </div>
+      </form>
+
+      <div class="card toolbar">
+        <input type="search" id="searchInput" placeholder="Search tasks…" aria-label="Search tasks">
+        <select id="filterSelect" aria-label="Filter tasks">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+          <option value="High">High Priority</option>
+          <option value="Medium">Medium Priority</option>
+          <option value="Low">Low Priority</option>
+        </select>
+        <select id="sortSelect" aria-label="Sort tasks">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="deadline">Deadline</option>
+          <option value="priority">Priority</option>
+        </select>
+      </div>
+      <div class="task-grid" id="taskList"></div>
+    </section>
+
+    <!-- STATISTICS -->
+    <section id="statistics" class="view">
+      <h2>Statistics</h2>
+      <div class="stats-grid" id="statsCards"></div>
+      <div class="card">
+        <strong>Task overview</strong>
+        <div class="chart" id="chart"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section id="settings" class="view">
+      <h2>Settings</h2>
+      <div class="card">
+        <div class="row-between"><span>Dark mode</span><button class="btn" id="themeBtn2">Switch theme</button></div>
+        <hr>
+        <div class="row-between"><span>Delete every saved task</span><button class="btn danger" id="clearAll">Clear all tasks</button></div>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast-box" id="toastBox" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
